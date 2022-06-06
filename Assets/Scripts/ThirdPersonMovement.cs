@@ -35,6 +35,11 @@ public class ThirdPersonMovement : MonoBehaviour
     private void Update() 
     {
         Move();
+
+        if(Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            Attack();
+        }
     }
 
     private void Move() 
@@ -102,6 +107,11 @@ public class ThirdPersonMovement : MonoBehaviour
     {
         animator.Play("Base Layer.Jump", 0, 0.05f);
         velocity.y = Mathf.Sqrt(jumpHeight * -2 * gravity);
+    }
+
+    private void Attack() 
+    {
+        animator.SetTrigger("Attack");
     }
     
 }
