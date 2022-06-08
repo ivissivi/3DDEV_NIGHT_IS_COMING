@@ -5,11 +5,19 @@ using UnityEngine;
 public class PlayerStats : CharacterStats
 {
     private PlayerHUD hud;
+    private UIController ui;
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         hud = GetComponent<PlayerHUD>();
+        ui = GetComponent<UIController>();
         InitVariables();
+    }
+
+    public override void Die()
+    {
+        base.Die();
+        ui.SetHUD(false);
     }
 
     public override void CheckHealth()
@@ -19,7 +27,7 @@ public class PlayerStats : CharacterStats
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if(Input.GetKeyDown(KeyCode.T))
         {

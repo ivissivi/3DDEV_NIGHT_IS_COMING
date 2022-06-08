@@ -32,20 +32,24 @@ public class ThirdPersonMovement : MonoBehaviour
 
     private CharacterController controller;
     private Animator animator;
+    private PlayerStats stats;
 
     private void Start() 
     {
         controller = GetComponent<CharacterController>();
         animator = GetComponentInChildren<Animator>();
+        stats = GetComponent<PlayerStats>();
     }
 
     private void Update() 
     {
+        if(!stats.IsDead()){
         Move();
 
         if(Input.GetKeyDown(KeyCode.Mouse0))
         {
             Attack();
+        }
         }
     }
 
@@ -86,11 +90,10 @@ public class ThirdPersonMovement : MonoBehaviour
                 Jump();
             }
         }
-
-        controller.Move(moveDirection * Time.deltaTime);
-        moveDirection *= walkSpeed;
-        velocity.y += gravity * Time.deltaTime;
-        controller.Move(velocity * Time.deltaTime);
+            controller.Move(moveDirection * Time.deltaTime);
+            moveDirection *= walkSpeed;
+            velocity.y += gravity * Time.deltaTime;
+            controller.Move(velocity * Time.deltaTime);
     }
 
     private void Idle()
