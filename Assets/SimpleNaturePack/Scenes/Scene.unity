@@ -7559,6 +7559,7 @@ GameObject:
   - component: {fileID: 1948422609}
   - component: {fileID: 1948422608}
   - component: {fileID: 1948422612}
+  - component: {fileID: 1948422613}
   m_Layer: 0
   m_Name: AI
   m_TagString: Untagged
@@ -7648,6 +7649,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stoppingDistance: 1.2
   target: {fileID: 1585915468}
+--- !u!114 &1948422613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1948422607}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00fb56acba00d34428d8bd9a27b9453d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 0
+  maxHealth: 0
+  isDead: 0
+  dmg: 0
+  attackSpeed: 0
+  canAttack: 0
 --- !u!1001 &1958137738
 PrefabInstance:
   m_ObjectHideFlags: 0

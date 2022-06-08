@@ -8,19 +8,24 @@ public class GoblinController : MonoBehaviour
     [SerializeField] private float stoppingDistance = 1.2f;
     private NavMeshAgent agent = null;
     private Animator animator = null;
-    [SerializeField] private Transform target;
+    private GoblinStats stats = null;
+    [SerializeField] private Transform player;
+
+    private float lastAttack = 0;
+    private bool hasReachedPlayer = false;
     // Start is called before the first frame update
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponentInChildren<Animator>();
+        stats = GetComponent<GoblinStats>();
     }
 
     private void MoveToPlayer()
     {
-        agent.SetDestination(target.position);
+        agent.SetDestination(player.position);
 
-        float distanceToPlayer = Vector3.Distance(transform.position, target.position);
+        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
         if(distanceToPlayer >= agent.stoppingDistance) 
         {
@@ -30,14 +35,40 @@ public class GoblinController : MonoBehaviour
         if(distanceToPlayer <= agent.stoppingDistance)
         {
             animator.SetFloat("Velocity", 0.1f);
+
+            if(!hasReachedPlayer) //waits 3 seconds after reaching the player to attack
+            {
+                hasReachedPlayer = true;
+                lastAttack = Time.time;
+            }
+            
+            if(Time.time >= lastAttack + stats.attackSpeed) //waits for 3 seconds to do the attack again
+            {
+                lastAttack = Time.time;
+                CharacterStats playerStats = player.GetComponent<CharacterStats>();
+                AttackPlayer(playerStats);
+            }
+        } 
+        else 
+        {
+            if(hasReachedPlayer)
+            {
+                hasReachedPlayer = false;
+            }
         }
+    }
+
+    private void AttackPlayer(CharacterStats statsToDamage)
+    {
+        animator.SetTrigger("Attack");
+        stats.DoDamage(statsToDamage);
     }
 
     private void RotateToPlayer() 
     {
-        //transform.LookAt(target);
+        //transform.LookAt(player);
 
-        Vector3 direction = target.position - transform.position;
+        Vector3 direction = player.position - transform.position;
         Quaternion rotation = Quaternion.LookRotation(direction, Vector3.up);
         transform.rotation = rotation;
     }

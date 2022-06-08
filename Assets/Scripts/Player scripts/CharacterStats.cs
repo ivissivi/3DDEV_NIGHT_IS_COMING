@@ -29,12 +29,12 @@ public class CharacterStats : MonoBehaviour
         }
     }
 
-    public void Die()
+    public virtual void Die()
     {
         isDead = true;
     }
 
-    private void SetHealthTo(int healthToSet)
+    public void SetHealthTo(int healthToSet)
     {
         health = healthToSet;
         CheckHealth();
@@ -52,7 +52,7 @@ public class CharacterStats : MonoBehaviour
         SetHealthTo(healthAfterHeal);
     }
 
-    public void InitVariables()
+    public virtual void InitVariables()
     {
         maxHealth = 100;
         SetHealthTo(maxHealth);
