@@ -9,7 +9,7 @@ public class GoblinController : MonoBehaviour
     private NavMeshAgent agent = null;
     private Animator animator = null;
     private GoblinStats stats = null;
-    [SerializeField] private Transform player;
+    private Transform player;
 
     private float lastAttack = 0;
     private bool hasReachedPlayer = false;
@@ -19,6 +19,7 @@ public class GoblinController : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponentInChildren<Animator>();
         stats = GetComponent<GoblinStats>();
+        player = ThirdPersonMovement.instance;
     }
 
     private void MoveToPlayer()
@@ -36,13 +37,13 @@ public class GoblinController : MonoBehaviour
         {
             animator.SetFloat("Velocity", 0.1f);
 
-            if(!hasReachedPlayer) //waits 3 seconds after reaching the player to attack
+            if(!hasReachedPlayer) //waits 1 second after reaching the player to attack
             {
                 hasReachedPlayer = true;
                 lastAttack = Time.time;
             }
             
-            if(Time.time >= lastAttack + stats.attackSpeed) //waits for 3 seconds to do the attack again
+            if(Time.time >= lastAttack + stats.attackSpeed) //waits for 1 second to do the attack again
             {
                 lastAttack = Time.time;
                 CharacterStats playerStats = player.GetComponent<CharacterStats>();

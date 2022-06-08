@@ -9,6 +9,13 @@ using UnityEngine;
 
 public class ThirdPersonMovement : MonoBehaviour
 {
+    public static Transform instance;
+
+    private void Awake()
+    {
+        instance = this.transform;
+    }
+
     [SerializeField] public float moveSpeed;
     [SerializeField] private float walkSpeed;
     [SerializeField] private float runSpeed;
