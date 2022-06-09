@@ -51,6 +51,10 @@ public class ThirdPersonMovement : MonoBehaviour
             Attack();
         }
         }
+        else
+        {
+            Die();
+        }
     }
 
     private void Move() 
@@ -117,6 +121,11 @@ public class ThirdPersonMovement : MonoBehaviour
     {
         animator.Play("Base Layer.Jump", 0, 0.05f);
         velocity.y = Mathf.Sqrt(jumpHeight * -2 * gravity);
+    }
+
+    private void Die()
+    {
+        animator.Play("Base Layer.Falling Back Death", 0, 0.05f);
     }
 
     private void Attack() 

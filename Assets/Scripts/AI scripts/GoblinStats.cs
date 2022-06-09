@@ -27,7 +27,7 @@ public class GoblinStats : CharacterStats
         isDead = false;
 
         dmg = 5;
-        attackSpeed = 1f;
+        attackSpeed = 3f;
         canAttack = true;
     }
 

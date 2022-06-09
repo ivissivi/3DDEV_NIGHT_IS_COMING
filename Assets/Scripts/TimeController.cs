@@ -9,6 +9,7 @@ public class TimeController : MonoBehaviour
     [SerializeField] private float multiplier;
     [SerializeField] private float startingHour;
     [SerializeField] private TextMeshProUGUI text;
+    [SerializeField] private TextMeshProUGUI nightIsComing;
     [SerializeField] private Light sun;
     [SerializeField] private float sunriseHour;
     [SerializeField] private float sunsetHour;

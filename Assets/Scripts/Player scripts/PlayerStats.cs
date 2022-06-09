@@ -25,13 +25,4 @@ public class PlayerStats : CharacterStats
         base.CheckHealth();
         hud.UpdateHealth(health);
     }
-
-    // Update is called once per frame
-    private void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.T))
-        {
-            TakeDamage(10);
-        }
-    }
 }

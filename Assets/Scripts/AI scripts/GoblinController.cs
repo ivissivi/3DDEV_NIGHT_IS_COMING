@@ -43,7 +43,7 @@ public class GoblinController : MonoBehaviour
                 lastAttack = Time.time;
             }
             
-            if(Time.time >= lastAttack + stats.attackSpeed) //waits for 1 second to do the attack again
+            if(Time.time >= lastAttack + stats.attackSpeed) //waits for 3 seconds to do the attack again
             {
                 lastAttack = Time.time;
                 CharacterStats playerStats = player.GetComponent<CharacterStats>();
