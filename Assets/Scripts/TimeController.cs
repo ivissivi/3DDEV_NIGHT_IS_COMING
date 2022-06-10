@@ -51,7 +51,6 @@ public class TimeController : MonoBehaviour
     void Update()
     {
         currentTime = currentTime.AddSeconds(Time.deltaTime * multiplier);
-
         if(text != null)
         {
             text.text = currentTime.ToString("HH:mm");
@@ -68,8 +67,17 @@ public class TimeController : MonoBehaviour
         if(difference.TotalSeconds < 0)
         {
             difference += TimeSpan.FromHours(24);
+            nightIsComing.text = "Night is coming!";
+            if(difference.TotalSeconds < 43200)
+            {
+                nightIsComing.text = "";
+            }
         }
-
+        else if(difference.TotalSeconds > 3 * multiplier)
+        {
+            nightIsComing.text = "";
+        }
+       
         return difference;
     }
 

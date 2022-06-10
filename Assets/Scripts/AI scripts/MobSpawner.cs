@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class MobSpawner : MonoBehaviour
 {
     [SerializeField] private Night[] nights;
-    [SerializeField] private float timeUntilNight = 3f;
+    [SerializeField] private float timeUntilNight = 0;
     [SerializeField] private float nightCountdown = 0;
+    [SerializeField] private TextMeshProUGUI nightCountdownText;
+    [SerializeField] private Time time;
 
     [SerializeField] private Transform[] spawners;
     [SerializeField] private List<CharacterStats> mobList;
@@ -69,6 +72,7 @@ public class MobSpawner : MonoBehaviour
 
     private void Update()
     {
+        nightCountdownText.text = nightCountdown.ToString();
         if(state == SpawnState.WAITING) 
         {
             if(!MobsAreDead())
