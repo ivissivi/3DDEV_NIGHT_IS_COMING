@@ -9,7 +9,8 @@ public class TimeController : MonoBehaviour
     [SerializeField] private float multiplier;
     [SerializeField] private float startingHour;
     [SerializeField] private TextMeshProUGUI text;
-    [SerializeField] private TextMeshProUGUI nightIsComing;
+    [SerializeField] private TextMeshProUGUI nightIsComingMessage;
+    [SerializeField] private TextMeshProUGUI dayCountText;
     [SerializeField] private Light sun;
     [SerializeField] private float sunriseHour;
     [SerializeField] private float sunsetHour;
@@ -27,6 +28,8 @@ public class TimeController : MonoBehaviour
 
     [SerializeField] private Light moonLight;
     [SerializeField] private float maxMoonIntensity;
+
+    private int dayCount;
 
     // Start is called before the first frame update
     void Start()
@@ -55,7 +58,6 @@ public class TimeController : MonoBehaviour
         {
             text.text = currentTime.ToString("HH:mm");
         }
-
         RotateSun();
         UpdateLight();
     }
@@ -67,17 +69,17 @@ public class TimeController : MonoBehaviour
         if(difference.TotalSeconds < 0)
         {
             difference += TimeSpan.FromHours(24);
-            nightIsComing.text = "Night is coming!";
+            nightIsComingMessage.text = "Night is coming!";
             if(difference.TotalSeconds < 43200)
             {
-                nightIsComing.text = "";
+                nightIsComingMessage.text = "";
             }
         }
         else if(difference.TotalSeconds > 3 * multiplier)
         {
-            nightIsComing.text = "";
+            nightIsComingMessage.text = "";
         }
-       
+
         return difference;
     }
 
@@ -91,8 +93,9 @@ public class TimeController : MonoBehaviour
             TimeSpan timePassed = CalculateDifference(sunriseTime, currentTime.TimeOfDay);
 
             double percentage = timePassed.TotalMinutes / duration.TotalMinutes;
-
+        
             sunlightRotation = Mathf.Lerp(0, 180, (float)percentage); //Sets the rotation value to 0 at sunrise and increases as the day progresses and reaches 180 at the peak time, which is sunset.
+
         }
         else //Night time rotation percentage
         {
@@ -101,6 +104,10 @@ public class TimeController : MonoBehaviour
 
             double percentage = timePassed.TotalMinutes / duration.TotalMinutes;
 
+            if(percentage == 0.250) 
+            {
+                dayCount++;
+            }
             sunlightRotation = Mathf.Lerp(180, 360, (float)percentage);
         }
 

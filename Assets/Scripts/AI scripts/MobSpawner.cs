@@ -9,6 +9,7 @@ public class MobSpawner : MonoBehaviour
     [SerializeField] private float timeUntilNight = 0;
     [SerializeField] private float nightCountdown = 0;
     [SerializeField] private TextMeshProUGUI nightCountdownText;
+    [SerializeField] private TextMeshProUGUI dayCountText;
     [SerializeField] private Time time;
 
     [SerializeField] private Transform[] spawners;
@@ -19,6 +20,8 @@ public class MobSpawner : MonoBehaviour
     private SpawnState state = SpawnState.COUNTING;
 
     private int currentNight;
+
+    private int dayCount;
 
     private void SpawnMob(GameObject mob)
     {
@@ -72,6 +75,7 @@ public class MobSpawner : MonoBehaviour
 
     private void Update()
     {
+        dayCountText.text = "Day: " + dayCount;
         nightCountdownText.text = nightCountdown.ToString();
         if(state == SpawnState.WAITING) 
         {
@@ -82,6 +86,7 @@ public class MobSpawner : MonoBehaviour
             else 
             {
                 StartDay();
+                dayCount++;
             }
         }
 
